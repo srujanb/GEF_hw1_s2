@@ -7,11 +7,25 @@ import processing.core.PApplet;
 
 public class MyMsgServer extends PApplet{
 
-	int port = 6600;
-	ServerSocket serverSocket;
+	static int port = 6600;
 	
 	public static void main(String args[]) {
 		PApplet.main("MyMsgServer");
+//		System.out.println("Main method of server called");
+		try {
+			ServerSocket serverSocket = new ServerSocket(port);
+			while(true) {
+				System.out.println("About to accept clients");
+				Socket clientSocket = serverSocket.accept();
+				ClientManager clientManager = new ClientManager(clientSocket);
+				System.out.println("Accepted");
+				OutputStream outputStream = clientSocket.getOutputStream();
+				outputStream.write("From the output stream".getBytes());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void settings() {
@@ -19,25 +33,10 @@ public class MyMsgServer extends PApplet{
 	}
 	
 	public void setup() {
-		try {
-			serverSocket = new ServerSocket(port);
-		} catch (IOException e) {
-			System.out.println("Error creating instance of serversocket.");
-			e.printStackTrace();
-		}
+	
 	}
 	
-	public void draw() {
-		System.out.println("About to accept clients");
-		try {
-			Socket clientSocket = serverSocket.accept();
-			System.out.println("Accepted");
-			OutputStream outputStream = clientSocket.getOutputStream();
-			outputStream.write("From the output stream".getBytes());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void draw() {		
 		
 	}
 	
