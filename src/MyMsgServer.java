@@ -18,9 +18,7 @@ public class MyMsgServer extends PApplet{
 				System.out.println("About to accept clients");
 				Socket clientSocket = serverSocket.accept();
 				ClientManager clientManager = new ClientManager(clientSocket);
-				System.out.println("Accepted");
-				OutputStream outputStream = clientSocket.getOutputStream();
-				outputStream.write("From the output stream".getBytes());
+				clientManager.start();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
