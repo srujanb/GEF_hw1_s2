@@ -5,11 +5,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class ClientManager extends Thread{
+public class Server extends Thread{
 
 	private Socket clientSocket;
 
-	public ClientManager(Socket clientSocket) {
+	public Server(Socket clientSocket) {
 		this.clientSocket = clientSocket;
 	}
 	
@@ -26,14 +26,15 @@ public class ClientManager extends Thread{
 		OutputStream outputStream = clientSocket.getOutputStream();
 		InputStream inputStream = clientSocket.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-		String clientMessage;
-		
+
+		String clientMessage;		
 		while( (clientMessage = reader.readLine()) != null) {
 			if ("x".equalsIgnoreCase(clientMessage)) {
 				break;
 			}
 			String serverResponse = "You typed: " + clientMessage + "\n";
 			outputStream.write(serverResponse.getBytes());
+			System.out.println("Recieved message: " + clientMessage);
 		}
 		clientSocket.close();
 	}
