@@ -32,7 +32,7 @@ public class Server extends Thread{
 			if ("x".equalsIgnoreCase(clientMessage)) {
 				break;
 			}
-			String serverResponse = "You typed: " + clientMessage + "\n";
+			String serverResponse = "You sent: " + clientMessage + "\n";
 			outputStream.write(serverResponse.getBytes());
 			System.out.println("Recieved message: " + clientMessage);
 		}

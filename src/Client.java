@@ -30,20 +30,25 @@ public class Client extends Thread{
 		reader = new BufferedReader(new InputStreamReader(
 	            socket.getInputStream()));
 	    out = new PrintWriter(socket.getOutputStream(), true);
-	    outputStream = socket.getOutputStream();
+//	    outputStream = socket.getOutputStream();
 	    
-	    while (true) {
-	    	System.out.println("Sending message to server");
-//	    	outputStream.write("Message from client".getBytes());
-	    	out.println("Message from client");
-	    	try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	
-	    }
+	    ClientInputReader clientInputReader = new ClientInputReader(socket);
+	    clientInputReader.start();
+	    
+	    ClientOutputPrinter clientOutputPrinter = new ClientOutputPrinter(socket);
+	    clientOutputPrinter.start();
+	    
+//	    while (true) {
+//	    	System.out.println("Sending message to server");
+////	    	outputStream.write("Message from client".getBytes());
+//	    	out.println("Message from client");
+//	    	try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//	    }
 	    
 	}
 

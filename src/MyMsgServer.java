@@ -18,8 +18,8 @@ public class MyMsgServer extends PApplet{
 				System.out.println("About to accept clients");
 				Socket clientSocket = serverSocket.accept();
 				System.out.println("Accepted");
-				Server clientManager = new Server(clientSocket);
-				clientManager.start();
+				Server server = new Server(clientSocket);
+				server.start();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
