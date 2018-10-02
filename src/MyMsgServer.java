@@ -11,7 +11,16 @@ public class MyMsgServer extends PApplet{
 	
 	public static void main(String args[]) {
 		PApplet.main("MyMsgServer");
-//		System.out.println("Main method of server called");
+		System.out.println("Main method of server called");
+		Runnable runnable = new Runnable() {
+			public void run() {
+				begin();
+			}
+		};
+		new Thread(runnable).start();
+	}
+	
+	public static void begin() {
 		try {
 			ServerSocket serverSocket = new ServerSocket(port);
 			while(true) {
@@ -28,15 +37,16 @@ public class MyMsgServer extends PApplet{
 	}
 	
 	public void settings() {
+//		System.out.println("Setup called");
 		size(1024,720);
 	}
 	
 	public void setup() {
-	
+//		System.out.println("Setup called");
 	}
 	
 	public void draw() {		
-		
+//		System.out.println("Draw called");
 	}
 	
 }
